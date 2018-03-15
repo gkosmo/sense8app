@@ -1,0 +1,9 @@
+ <div class="well"    data-education-id='<%= hob.id %>' >
+  <p> <%= hob.title %> </p>
+   <strong>Organisation or Trainer(s) </strong>
+    <i>  <%= hob.organisation %> </i>
+    description:
+    <p><%= hob.description %> </p>
+    <%= link_to 'Delete Hobby', profile_education_path(@profile, hob), method: :delete , remote: true%>
+
+  </div>

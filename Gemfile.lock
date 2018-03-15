@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/stympy/faker.git
+  revision: 679fd508c9f41f41b6df62024d67bc2281953395
+  branch: master
+  specs:
+    faker (1.8.7)
+      i18n (>= 0.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -64,6 +72,7 @@ GEM
       thor (~> 0.14)
     font-awesome-sass (4.7.0)
       sass (>= 3.2)
+    geocoder (1.4.7)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     i18n (0.9.5)
@@ -189,8 +198,10 @@ DEPENDENCIES
   autoprefixer-rails
   bootstrap-sass (~> 3.3)
   devise
+  faker!
   figaro
   font-awesome-sass (~> 4.7)
+  geocoder
   jbuilder (~> 2.0)
   listen (~> 3.0.5)
   pg (~> 0.21)

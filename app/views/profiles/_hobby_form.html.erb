@@ -1,0 +1,9 @@
+<div class="container">
+  New Hobby
+  <%= simple_form_for [@profile, @new_hobby], remote: true do |f| %>
+        <%= f.input :title, label: "Title" %>
+        <%= f.input :proficiency, label: "Proficiency" %>
+        <%= f.input :description %>
+        <%= f.button :submit %>
+  <% end %>
+</div>

@@ -1,0 +1,17 @@
+function refreshForm(innerHTML) {
+  const newReviewForm = document.getElementById('new_hobby');
+  newReviewForm.innerHTML = innerHTML;
+}
+
+function addReview(reviewHTML) {
+  const reviews = document.getElementById('hobbies');
+  reviews.insertAdjacentHTML('beforeend', reviewHTML);
+}
+
+<% if @profile.errors.any? %>
+
+  refreshForm('<%= j render "profiles/hobby_form", profile: @profile, new_hobby: @hobby %>');
+<% else %>
+  addReview('<%= j render "profiles/hobby", hob: @hobby %>');
+  refreshForm('<%= j render "profiles/hobby_form", profile: @profile, new_hobby: @new_hobby %>');
+<% end %>

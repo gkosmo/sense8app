@@ -1,0 +1,24 @@
+<div class="container">
+<%= simple_form_for(@profile) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :birth_place %>
+    <%= f.input :birth_date %>
+    <%= f.input :nickname %>
+    <%= f.input :living_place %>
+    <%= f.input :gender %>
+    <%= f.input :gender_identity %>
+    <%= f.input :sexuality %>
+
+
+<%= link_to "add_hobby", remote: true %>
+
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+</div>

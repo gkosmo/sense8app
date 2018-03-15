@@ -1,0 +1,17 @@
+function refreshForm(innerHTML) {
+  const newReviewForm = document.getElementById('new_education');
+  newReviewForm.innerHTML = innerHTML;
+}
+
+function addReview(reviewHTML) {
+  const reviews = document.getElementById('educations');
+  reviews.insertAdjacentHTML('beforeend', reviewHTML);
+}
+
+<% if @profile.errors.any? %>
+
+  refreshForm('<%= j render "profiles/education_form", profile: @profile, new_education: @education %>');
+<% else %>
+  addReview('<%= j render "profiles/education", hob: @education %>');
+  refreshForm('<%= j render "profiles/education_form", profile: @profile, new_education: @new_education %>');
+<% end %>

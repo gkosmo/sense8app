@@ -1,0 +1,9 @@
+<div class="container">
+  New Training or Education
+  <%= simple_form_for [@profile, @new_education], remote: true do |f| %>
+        <%= f.input :title, label: "Title" %>
+        <%= f.input :organisation, label: "Organisation or Trainer(s) who provided it" %>
+        <%= f.input :description, label: "Describe what it allowed you to do" %>
+        <%= f.button :submit %>
+  <% end %>
+</div>

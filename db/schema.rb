@@ -10,10 +10,94 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180315073506) do
+ActiveRecord::Schema.define(version: 20180315194431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "clusters", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "birth_date"
+  end
+
+  create_table "education_to_profiles", force: :cascade do |t|
+    t.bigint "education_id"
+    t.bigint "profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["education_id"], name: "index_education_to_profiles_on_education_id"
+    t.index ["profile_id"], name: "index_education_to_profiles_on_profile_id"
+  end
+
+  create_table "educations", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.string "organisation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hobbies", force: :cascade do |t|
+    t.string "title"
+    t.string "proficiency"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "description"
+  end
+
+  create_table "hobby_to_profiles", force: :cascade do |t|
+    t.bigint "hobby_id"
+    t.bigint "profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hobby_id"], name: "index_hobby_to_profiles_on_hobby_id"
+    t.index ["profile_id"], name: "index_hobby_to_profiles_on_profile_id"
+  end
+
+  create_table "language_to_profiles", force: :cascade do |t|
+    t.bigint "profile_id"
+    t.bigint "language_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["language_id"], name: "index_language_to_profiles_on_language_id"
+    t.index ["profile_id"], name: "index_language_to_profiles_on_profile_id"
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "profileclusters", force: :cascade do |t|
+    t.bigint "profile_id"
+    t.bigint "cluster_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cluster_id"], name: "index_profileclusters_on_cluster_id"
+    t.index ["profile_id"], name: "index_profileclusters_on_profile_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "birth_place"
+    t.date "birth_date"
+    t.string "nickname"
+    t.string "living_place"
+    t.string "gender"
+    t.string "gender_identity"
+    t.string "sexuality"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.float "birth_place_latitude"
+    t.float "birth_place_longitude"
+    t.float "living_place_latitude"
+    t.float "living_place_longitude"
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -32,4 +116,11 @@ ActiveRecord::Schema.define(version: 20180315073506) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "education_to_profiles", "educations"
+  add_foreign_key "education_to_profiles", "profiles"
+  add_foreign_key "hobby_to_profiles", "hobbies"
+  add_foreign_key "hobby_to_profiles", "profiles"
+  add_foreign_key "profileclusters", "clusters"
+  add_foreign_key "profileclusters", "profiles"
+  add_foreign_key "profiles", "users"
 end

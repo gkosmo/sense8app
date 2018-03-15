@@ -1,0 +1,9 @@
+  <div class="well"    data-hobby-id='<%= hob.id %>' >
+  <p> <%= hob.title %> </p>
+   <strong>profiency </strong>
+    <i>  <%= hob.proficiency %> </i>
+    description:
+    <p><%= hob.description %> </p>
+    <%= link_to 'Delete Hobby', profile_hobby_path(@profile, hob), method: :delete , remote: true%>
+
+  </div>
