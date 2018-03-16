@@ -1,7 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
-  before_action :check_profile
-
+ before_action :check_cluster
   # GET /profiles
   # GET /profiles.json
   def index
@@ -41,8 +40,11 @@ class ProfilesController < ApplicationController
   def create
     @profile = Profile.new(profile_params)
     @profile.user = current_user
+    current_user.profile = @profile
+    current_user.save!
     respond_to do |format|
       if @profile.save
+
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @profile }
       else
@@ -56,7 +58,7 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1.json
   def update
     respond_to do |format|
-      if @profile.update!(profile_params)
+      if @profile.update(profile_params)
         format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @profile }
       else
@@ -77,6 +79,10 @@ class ProfilesController < ApplicationController
   end
 
   private
+    def check_cluster
+        redirect_to root_path unless current_user.profile.cluster == @profile.cluster
+
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
       @profile = Profile.find(params[:id])

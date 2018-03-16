@@ -1,4 +1,5 @@
 class Cluster < ApplicationRecord
+  has_many :messages, as: :messageable
   has_many :profileclusters
   has_many :profiles, through: :profileclusters
   def self.create_or_find_cluster(current_user)

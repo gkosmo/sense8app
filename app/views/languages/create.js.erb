@@ -1,0 +1,17 @@
+function refreshForm(innerHTML) {
+  const newReviewForm = document.getElementById('new_language');
+  newReviewForm.innerHTML = innerHTML;
+}
+
+function addReview(reviewHTML) {
+  const reviews = document.getElementById('languages');
+  reviews.insertAdjacentHTML('beforeend', reviewHTML);
+}
+
+<% if @profile.errors.any? %>
+
+  refreshForm('<%= j render "profiles/language_form", profile: @profile, new_language: @language %>');
+<% else %>
+  addReview('<%= j render "profiles/language", hob: @language %>');
+  refreshForm('<%= j render "profiles/language_form", profile: @profile, new_language: @new_language %>');
+<% end %>

@@ -4,16 +4,15 @@
 <% if current_user && current_user.profile.cluster.nil? %>
   <%= link_to "Find A Cluster", profile_find_cluster_path(current_user.profile) %>
   <% else %>
-  <%= link_to "Your Cluster", cluster_path(current_user.profile.cluster.first) %>
+  <%= link_to "Your Cluster", cluster_path(current_user.profile.cluster) %>
 
 <% end %>
+
+  <p> This Profile is for Your Clusters</p>
 <% end %>
 
 
-
-
-
-
+<div class="well">
 <p>
   <strong>Birth place:</strong>
   <%= @profile.birth_place %>
@@ -44,54 +43,42 @@
   <%= @profile.gender_identity %>
 </p>
 
-<p>
   <strong>Sexuality:</strong>
   <%= @profile.sexuality %>
-</p>
-<p>
   <strong id="hobbies"> Hobbies</strong>
   <% @profile.hobbies.each do |hob| %>
         <%= render 'hobby', hob: hob %>
   <% end %>
-</p>
-<p>
   <strong id="educations"> Education and Training</strong>
   <% @profile.educations.each do |hob| %>
  <%= render 'education', hob: hob %>
   <% end %>
-</p>
 
 
 
-<p>
-  <strong> Languages</strong>
+
+  <strong id="languages"> Languages</strong>
   <% @profile.languages.each do |hob| %>
-  <p data-language-id='<%= hob.id %>'> <%= hob.name %>
-    <%= link_to 'X', profile_language_path(@profile, hob), method: :delete , remote: true%>
-</p>
+  <%= render 'language', hob: hob %>
+
   <% end %>
-</p>
-<% if current_user.profile == @profile %>
-<div class="container">
-<%= simple_form_for [@profile, @new_language], remote: true do |f| %>
-  <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.simple_fields_for :language_to_profiles do |fo| %>
-    <%= fo.input :languages, collection: Language.all %>
-    <% end %>
-  <div class="form-actions">
-    <%= f.button :submit %>
   </div>
-<% end %>
-</div>
-
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+<% if current_user.profile == @profile %>
+<div id="forms" style="-moz-box-shadow:    3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow:         3px 3px 5px 6px #ccc;">
+<strong> <i>For Your Eyes Only: Profile Updates </i></strong>
+ <strong> Update your Languages</strong>
+  <%= render 'language_form' %>
+<strong> Update Your trainings and Educations</strong>
+ <div class="form-group">
 
   <%= render 'education_form' %>
+  </div>
 
-
+<strong> Update Your Hobbies </strong>
   <%= render 'hobby_form' %>
 </div>
 <% end %>
+</div>

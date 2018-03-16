@@ -1,5 +1,24 @@
 <div class="container">
+  <div class="row">
+    <div class="col-xs-4 text-center">
+    <strong> Your Cluster</strong>
   <% @cluster.profiles.each do |profile| %>
-    <%= profile.nickname %>
+    <%= link_to profile.nickname, profile_path(profile) %>
   <% end %>
+</div>
+<div  id="messages" class="col-xs-7 col-xs-offset-1">
+
+<% @cluster.messages.each do |profile| %>
+   <p> <%= profile.body%>  <i>by <%= profile.user.profile.nickname %> </i> </p>
+  <% end %>
+
+</div>
+
+  <%= simple_form_for @message, url: cluster_cluster_message_path(@cluster), method: :post, remote: true do |f| %>
+  <%= f.input :body, label: "message to your cluster" %>
+  <%= f.submit %>
+
+
+  <% end %>
+</div>
 </div>

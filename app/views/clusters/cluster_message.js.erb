@@ -1,0 +1,7 @@
+function cluster_message(){
+var messagesNode = document.getElementById('messages');
+document.getElementById('message_body').value = "";
+var textnode = document.createTextNode("<%= @message.body %>");         // Create a text node
+messagesNode.appendChild(textnode);
+};
+cluster_message();

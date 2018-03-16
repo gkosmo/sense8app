@@ -1,0 +1,18 @@
+<div class="container">
+<%= simple_form_for [@profile, @new_language], remote: true do |f| %>
+  <%= f.error_notification %>
+ <div class="form-group">
+
+  <div class="form-inputs">
+    <%= f.simple_fields_for :language_to_profiles do |fo| %>
+    <%= fo.input :languages, collection: Language.all,  :input_html =>  {class: "language-input"} %>
+    <% end %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+</div>
+
+<% end %>
+</div>

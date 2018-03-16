@@ -2,7 +2,14 @@ class LanguagesController < ApplicationController
   def create
     set_profile
     @profile.languages << Language.find(profile_params[:language_to_profiles][:languages])
-    @profile.save
+    respond_to do |format|
+
+      if @profile.save
+         @language = @profile.languages.last
+        @new_language = Language.new
+      end
+      format.js
+    end
   end
 
   def update

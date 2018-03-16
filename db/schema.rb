@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180315194431) do
+ActiveRecord::Schema.define(version: 20180316133236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,17 @@ ActiveRecord::Schema.define(version: 20180315194431) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "messageable_type"
+    t.bigint "messageable_id"
+    t.string "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["messageable_type", "messageable_id"], name: "index_messages_on_messageable_type_and_messageable_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "profileclusters", force: :cascade do |t|
     t.bigint "profile_id"
     t.bigint "cluster_id"
@@ -96,6 +107,7 @@ ActiveRecord::Schema.define(version: 20180315194431) do
     t.float "birth_place_longitude"
     t.float "living_place_latitude"
     t.float "living_place_longitude"
+    t.boolean "email"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -112,7 +124,9 @@ ActiveRecord::Schema.define(version: 20180315194431) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "profile_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["profile_id"], name: "index_users_on_profile_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -120,7 +134,9 @@ ActiveRecord::Schema.define(version: 20180315194431) do
   add_foreign_key "education_to_profiles", "profiles"
   add_foreign_key "hobby_to_profiles", "hobbies"
   add_foreign_key "hobby_to_profiles", "profiles"
+  add_foreign_key "messages", "users"
   add_foreign_key "profileclusters", "clusters"
   add_foreign_key "profileclusters", "profiles"
   add_foreign_key "profiles", "users"
+  add_foreign_key "users", "profiles"
 end

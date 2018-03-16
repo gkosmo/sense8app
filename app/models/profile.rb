@@ -1,7 +1,7 @@
 class Profile < ApplicationRecord
   belongs_to :user
   has_many :profilecluster
-  has_many :cluster,through: :profilecluster
+  has_many :clusters,through: :profilecluster
   has_many :education_to_profile
   has_many :educations, through: :education_to_profile
   has_many :hobby_to_profile
@@ -12,13 +12,23 @@ class Profile < ApplicationRecord
   validates :birth_date, presence: true
   validates :nickname, presence: true
   validates :living_place, presence: true
-  validates :gender, presence: true
-  validates :gender_identity, presence: true
-  validates :sexuality, presence: true
+  validates :gender, presence: true, inclusion: {in: ["male","female", "other"]}
+  validates :gender_identity, presence: true,inclusion: { in: ["male","female", "other"] }
+  validates :sexuality, presence: true,inclusion: { in: ["hetero", "lesbian", "gay", "trans", "bi", "questionning", "investigating", "queer", "intersexual"] }
   # after_validation :geocode_birth_and_living
 
    accepts_nested_attributes_for :hobby_to_profile
 
+  def self.genders
+    ["male","female", "other"]
+  end
+
+  def self.sexualities
+    ["hetero", "lesbian", "gay", "trans", "bi", "questionning", "investigating", "queer", "intersexual"]
+  end
+  def cluster
+      self.clusters.first
+  end
   private
 
   def geocode_birth_and_living

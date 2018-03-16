@@ -4,17 +4,14 @@
 
   <div class="form-inputs">
     <%= f.input :birth_place %>
-    <%= f.input :birth_date %>
+    <%= f.input :birth_date, as: :date, start_year: Date.today.year - 90,
+                              end_year: Date.today.year - 18 %>
     <%= f.input :nickname %>
     <%= f.input :living_place %>
-    <%= f.input :gender %>
-    <%= f.input :gender_identity %>
-    <%= f.input :sexuality %>
-
-
-<%= link_to "add_hobby", remote: true %>
-
-
+    <%= f.input :gender, collection: Profile.genders %>
+    <%= f.input :gender_identity, collection: Profile.genders %>
+    <%= f.input :sexuality , collection: Profile.sexualities %>
+    <%= f.input :email, label: "Show your email to your cluster ? " %>
   </div>
 
   <div class="form-actions">
