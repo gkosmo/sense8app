@@ -13,28 +13,28 @@ csv.each do |row|
 end
 end
 
-200.times do
+# 200.times do
 
-user = User.new
-user.email = Faker::Internet.email
-user.password = '#$taawktljasktlw4aaglj'
-user.encrypted_password = '#$taawktljasktlw4aaglj'
-user.save!
-Profile.create!(
-    birth_place_latitude:  Faker::Address.latitude,
-     birth_place_longitude:  Faker::Address.longitude,
+# user = User.new
+# user.email = Faker::Internet.email
+# user.password = '#$taawktljasktlw4aaglj'
+# user.encrypted_password = '#$taawktljasktlw4aaglj'
+# user.save!
+# Profile.create!(
+#     birth_place_latitude:  Faker::Address.latitude,
+#      birth_place_longitude:  Faker::Address.longitude,
 
-   living_place_latitude:  Faker::Address.latitude,
+#    living_place_latitude:  Faker::Address.latitude,
 
-   living_place_longitude:  Faker::Address.longitude,
+#    living_place_longitude:  Faker::Address.longitude,
 
-   user: user,
-    birth_place: Faker::Address.street_address ,
-birth_date: Faker::Date.between(40.years.ago, 18.years.ago),
-  nickname: Faker::Internet.user_name,
-  living_place: Faker::Address.street_address ,
-  gender: ["male","female", "other"].sample,
-  gender_identity: ["male","female", "other"].sample,
-  sexuality: ["hetero", "lesbian", "gay", "trans", "bi", "questionning", "investigating", "queer", "intersexual"].sample
- )
-end
+#    user: user,
+#     birth_place: Faker::Address.street_address ,
+# birth_date: Faker::Date.between(40.years.ago, 18.years.ago),
+#   nickname: Faker::Internet.user_name,
+#   living_place: Faker::Address.street_address ,
+#   gender: ["male","female", "other"].sample,
+#   gender_identity: ["male","female", "other"].sample,
+#   sexuality: ["hetero", "lesbian", "gay", "trans", "bi", "questionning", "investigating", "queer", "intersexual"].sample
+#  )
+# end
