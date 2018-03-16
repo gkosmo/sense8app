@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :clusters, only: [:show] do
         post "cluster_message", to: "clusters#cluster_message"
   end
-  resources :profiles do
+  resources :profiles, only: [:show, :new, :create] do
     resources :hobbies, only: [:create, :destroy]
     resources :educations, only: [:create, :destroy]
     resources :languages
