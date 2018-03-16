@@ -83,7 +83,7 @@ class ProfilesController < ApplicationController
      if  current_user.profile == @profile
      elsif !current_user.profile.cluster.nil? &&  current_user.profile.cluster == @profile.cluster
      else
-        redirect_to root_path unless   ||
+        redirect_to root_path
       end
     end
     # Use callbacks to share common setup or constraints between actions.
