@@ -10,15 +10,17 @@
     <% if user_signed_in? %>
 
       <!-- Links when logged in -->
-            <% if current_user && current_user.profile %>
+      <% if current_user && current_user.profile %>
 
-      <%= link_to "Profile", profile_path(current_user.profile), class: "navbar-wagon-item navbar-wagon-link" %>
-      <% else %>
-      <%= link_to "Profile", new_profile_path, class: "navbar-wagon-item navbar-wagon-link" %>
+       <%= link_to "Profile", profile_path(current_user.profile), class: "navbar-wagon-item navbar-wagon-link" %>
+       <% if current_user.profile.cluster %>
+       <%= link_to "Your Cluster", cluster_path(current_user.profile.cluster), class: "navbar-wagon-item navbar-wagon-link" %>
 
       <% end %>
-      <%= link_to "Trips", "#", class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "Messages", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+      <% else %>
+       <%= link_to "Profile", new_profile_path, class: "navbar-wagon-item navbar-wagon-link" %>
+
+      <% end %>
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
@@ -38,11 +40,6 @@
               <% end %>
               <% end %>
 
-            </li>
-            <li>
-              <%= link_to "#" do %>
-                <i class="fa fa-cog"></i>  <%= t(".settings", default: "Settings") %>
-              <% end %>
             </li>
             <li>
               <%= link_to destroy_user_session_path, method: :delete do %>
@@ -72,8 +69,6 @@
 
             </li>
 
-        <li><a href="#">Other one</a></li>
-        <li><a href="#">Other one</a></li>
       </ul>
     </div>
   </div>
