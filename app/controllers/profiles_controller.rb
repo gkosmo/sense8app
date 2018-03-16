@@ -80,7 +80,7 @@ class ProfilesController < ApplicationController
 
   private
     def check_cluster
-        redirect_to root_path unless current_user.profile.cluster == @profile.cluster
+        redirect_to root_path unless current_user.profile.cluster == @profile.cluster || current_user.profile == @profile
 
     end
     # Use callbacks to share common setup or constraints between actions.
