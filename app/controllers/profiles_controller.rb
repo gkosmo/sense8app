@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
- before_action :check_cluster
+ before_action :check_cluster, except: [:new]
   # GET /profiles
   # GET /profiles.json
   def index
