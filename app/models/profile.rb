@@ -34,7 +34,7 @@ class Profile < ApplicationRecord
   def geocode_birth_and_living
     self.birth_place_latitude, self.birth_place_longitude = Geocoder.coordinates(birth_place)
     self.living_place_latitude, self.living_place_longitude = Geocoder.coordinates(living_place)
-    self.save!
+    self.save(validate: false)
     # same for work
   end
 end
