@@ -1,7 +1,9 @@
 function cluster_message(){
 var messagesNode = document.getElementById('messages');
 document.getElementById('message_body').value = "";
-var textnode = document.createTextNode("<%= @message.body %>");         // Create a text node
-messagesNode.appendChild(textnode);
+var textnode =   ' <p> <%= @message.body%>  <i>by <%= @message.user.profile.nickname %> </i> </p>';         // Create a text node
+var node = document.createElement('div');
+node.innerHTML = textnode;
+messagesNode.appendChild(node);
 };
 cluster_message();

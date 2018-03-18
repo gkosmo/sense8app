@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180316133236) do
+ActiveRecord::Schema.define(version: 20180317203256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,13 @@ ActiveRecord::Schema.define(version: 20180316133236) do
     t.string "organisation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.bigint "cluster_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cluster_id"], name: "index_groups_on_cluster_id"
   end
 
   create_table "hobbies", force: :cascade do |t|
@@ -132,6 +139,7 @@ ActiveRecord::Schema.define(version: 20180316133236) do
 
   add_foreign_key "education_to_profiles", "educations"
   add_foreign_key "education_to_profiles", "profiles"
+  add_foreign_key "groups", "clusters"
   add_foreign_key "hobby_to_profiles", "hobbies"
   add_foreign_key "hobby_to_profiles", "profiles"
   add_foreign_key "messages", "users"

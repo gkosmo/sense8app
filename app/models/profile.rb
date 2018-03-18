@@ -1,5 +1,5 @@
 class Profile < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
   has_many :profilecluster
   has_many :clusters,through: :profilecluster
   has_many :education_to_profile

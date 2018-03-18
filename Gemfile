@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
-ruby '2.4.0'
-
+ruby '2.4.3'
+gem 'ruby-growl'
 gem 'devise'
 gem 'figaro'
 gem 'jbuilder', '~> 2.0'
@@ -18,6 +18,7 @@ gem 'uglifier'
 gem 'webpacker'
 gem "geocoder"
 group :development do
+   gem 'bullet'
   gem 'web-console', '>= 3.3.0'
 end
 

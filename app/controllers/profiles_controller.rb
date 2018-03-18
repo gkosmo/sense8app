@@ -17,7 +17,7 @@ class ProfilesController < ApplicationController
 
   end
   def find_cluster
-    cluster=  Cluster.create_or_find_cluster(current_user)
+    cluster=  Cluster.create_or_find_cluster(current_user.profile)
     redirect_to cluster_path(cluster)
   end
   # GET /profiles/new
