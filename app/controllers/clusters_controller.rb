@@ -4,10 +4,19 @@ class ClustersController < ApplicationController
     check_cluster
     @group = Group.new
     @message = Message.new
-    if params[:messages]
+
+
+ respond_to do |format|
+    unless params[:messages].nil?
         @group = Group.includes(:profiles).find(params[:messages].to_i)
         @messages = @group.messages
+
+        format.js
+      else
+        format.html
     end
+  end
+
   end
   def cluster_message
     @cluster =Cluster.find(params[:cluster_id])

@@ -4,10 +4,15 @@ function updateMessages(messagesNode) {
   console.log('hey');
 }
 function updateForm(form ){
+  console.log('hey2');
+
   let messnode = document.getElementById('messages');
-  document.getElementById('new_message').innerHTML = form;
+  console.log('hey3');
+
+  document.getElementById('message-form').innerHTML = form;
+  console.log('hey4');
 }
-<% unless @messages.nil? %>
+<% unless @group.nil? %>
  document.getElementById('messages').innerHTML ="";
  <% @messages.each do |message| %>
    updateMessages('<%= j render 'message', message: message %>');

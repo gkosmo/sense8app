@@ -35,9 +35,20 @@ birth_date: Faker::Date.between(40.years.ago, 18.years.ago),
   living_place: Faker::Address.street_address ,
   gender: ["male","female", "other"].sample,
   gender_identity: ["male","female", "other"].sample,
-  sexuality: ["hetero", "lesbian", "gay", "trans", "bi", "questionning", "investigating", "queer", "intersexual"].sample
+  sexuality: Profile.sexualities.sample
  )
 profile.save(validate: false)
 user.profile = profile
-user.save
+user.save(validate: false)
+end
+
+
+20.times do
+  p = Profile.all.sample
+  p.birth_date = Date.parse('3 april 1986')
+  p.save(validate: false)
+end
+
+Profile.all.each do |p|
+Cluster.create_or_find_cluster(p)
 end
