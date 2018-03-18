@@ -1,0 +1,8 @@
+<div class="well">
+          <small>with: </small>
+          <% group.profiles.each do |profile| %>
+                <span> <%= profile.nickname %> </span>
+          <% end %>
+          <%= link_to "Messages",
+            cluster_path(@cluster,:messages => group.id), remote: true %>
+        </div>

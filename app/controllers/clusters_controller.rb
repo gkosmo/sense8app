@@ -2,7 +2,12 @@ class ClustersController < ApplicationController
   def show
     set_cluster
     check_cluster
+    @group = Group.new
     @message = Message.new
+    if params[:messages]
+        @group = Group.includes(:profiles).find(params[:messages].to_i)
+        @messages = @group.messages
+    end
   end
   def cluster_message
     @cluster =Cluster.find(params[:cluster_id])

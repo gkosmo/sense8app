@@ -1,7 +1,7 @@
 function cluster_message(){
 var messagesNode = document.getElementById('messages');
 document.getElementById('message_body').value = "";
-var textnode =  ' <%= j render "message", message: @message%>';         // Create a text node
+var textnode =  ' <%= j render "clusters/message", message: @message%>';         // Create a text node
 
 messagesNode.insertAdjacentHTML('beforeend',textnode);
 };

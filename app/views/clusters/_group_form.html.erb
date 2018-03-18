@@ -1,0 +1,4 @@
+ <%= simple_form_for @message, url: cluster_group_cluster_message_path(@cluster, @group), method: :post, remote: true do |f| %>
+        <%= f.input :body, label: "message to your group" %>
+        <%= f.submit %>
+<% end %>

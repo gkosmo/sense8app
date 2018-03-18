@@ -1,0 +1,16 @@
+function refreshForm(innerHTML) {
+  const newReviewForm = document.getElementById('new_language');
+  newReviewForm.innerHTML = innerHTML;
+}
+
+function addReview(reviewHTML) {
+  const reviews = document.getElementById('groups');
+  reviews.insertAdjacentHTML('beforeend', reviewHTML);
+}
+
+<% if @group.errors.any? %>
+
+<% else %>
+addReview('<%=j  render "clusters/group", group: @group %>');
+
+<% end %>

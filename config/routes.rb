@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
 
 
+  get 'groups/create'
+
   resources :clusters, only: [:show] do
         post "cluster_message", to: "clusters#cluster_message"
+        resources :groups, only: [:create] do
+            post "cluster_message", to: "groups#group_message"
+        end
   end
   resources :profiles, only: [:show, :new, :create] do
     resources :hobbies, only: [:create, :destroy]

@@ -1,24 +1,40 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-4 text-center">
-    <strong> Your Cluster</strong>
-  <% @cluster.profiles.each do |profile| %>
-    <%= link_to profile.nickname, profile_path(profile) %>
-  <% end %>
-</div>
-<div  id="messages" class="col-xs-7 col-xs-offset-1">
+      <div class="well ">
+      <strong> Your Cluster</strong>
+      <% @cluster.profiles.each do |profile| %>
+      <p> <%= link_to profile.nickname, profile_path(profile) %> </p>
+      <% end %>
+      </div>
 
-<% @cluster.messages.each do |profile| %>
-   <p> <%= profile.body%>  <i>by <%= profile.user.profile.nickname %> </i> </p>
-  <% end %>
+      <div class="well" id="groups">
+        <strong>Inner Cluster Chat Groups</strong>
+        <% current_user.profile.groups.includes(:profiles).each do |group| %>
+        <%= render 'group', group: group %>
+             <% end %>
+      </div>
+   <%= simple_form_for [@cluster, @group], remote: true do |f| %>
+        <%= f.input :profiles, collection: @cluster.profiles, collection: @cluster.profiles.reject{|p| p == current_user.profile }, label_method: :nickname, value_method: :id, multiple: true,   as: :check_boxes%>
+  <%= f.error_notification %>
 
-</div>
+    <%= f.submit %>
+   <% end %>
+    </div>
+    <div  class="col-xs-7 col-xs-offset-1">
+      <div class="well"  id="messages">
+        <% @cluster.messages.order(:created_at).each do |message| %>
 
-  <%= simple_form_for @message, url: cluster_cluster_message_path(@cluster), method: :post, remote: true do |f| %>
-  <%= f.input :body, label: "message to your cluster" %>
-  <%= f.submit %>
+          <%= render 'message', message: message%>
+        <% end %>
+      </div>
+      <%= simple_form_for @message, url: cluster_cluster_message_path(@cluster), method: :post, remote: true do |f| %>
+        <%= f.input :body, label: "message to your cluster" %>
+          <%= f.error_notification %>
 
+        <%= f.submit %>
+      <% end %>
+    </div>
 
-  <% end %>
-</div>
+  </div>
 </div>

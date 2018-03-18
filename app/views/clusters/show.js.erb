@@ -1,0 +1,16 @@
+function updateMessages(messagesNode) {
+  let messnode = document.getElementById('messages');
+  messnode.insertAdjacentHTML('beforeend', messagesNode);
+  console.log('hey');
+}
+function updateForm(form ){
+  let messnode = document.getElementById('messages');
+  document.getElementById('new_message').innerHTML = form;
+}
+<% unless @messages.nil? %>
+ document.getElementById('messages').innerHTML ="";
+ <% @messages.each do |message| %>
+   updateMessages('<%= j render 'message', message: message %>');
+  <% end %>
+   updateForm('<%= j render 'group_form' %>');
+  <% end %>
