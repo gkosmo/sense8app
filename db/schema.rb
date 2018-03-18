@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180317203256) do
+ActiveRecord::Schema.define(version: 20180318065603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,15 @@ ActiveRecord::Schema.define(version: 20180317203256) do
     t.index ["profile_id"], name: "index_profileclusters_on_profile_id"
   end
 
+  create_table "profilegroups", force: :cascade do |t|
+    t.bigint "profile_id"
+    t.bigint "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_profilegroups_on_group_id"
+    t.index ["profile_id"], name: "index_profilegroups_on_profile_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.string "birth_place"
     t.date "birth_date"
@@ -145,6 +154,8 @@ ActiveRecord::Schema.define(version: 20180317203256) do
   add_foreign_key "messages", "users"
   add_foreign_key "profileclusters", "clusters"
   add_foreign_key "profileclusters", "profiles"
+  add_foreign_key "profilegroups", "groups"
+  add_foreign_key "profilegroups", "profiles"
   add_foreign_key "profiles", "users"
   add_foreign_key "users", "profiles"
 end
