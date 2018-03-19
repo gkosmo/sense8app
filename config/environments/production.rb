@@ -9,7 +9,10 @@ Rails.application.configure do
   config.cache_classes = true
 
   # Eager load code on boot. This eager loads most of Rails and
-  # your application in memory, allowing both threaded web servers
+  # your applicatconfig.action_cable.url = "wss://www.yourdomain.top/cable"
+config.action_cable.allowed_request_origins = [ "http://www.yourdomain.top", "https://www.yourdomain.top" ]
+
+ion in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
@@ -82,6 +85,11 @@ Rails.application.configure do
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
+
+  #Action cable and reddis
+  config.action_cable.url = "ws://whispering-meadow-60697.herokuapp.com/clusters/1"
+  config.action_cable.allowed_request_origins = [ "http://whispering-meadow-60697.herokuapp.com/" ]
+
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
