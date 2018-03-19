@@ -86,7 +86,7 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
   #Action cable and reddis
-  config.action_cable.url = "ws://whispering-meadow-60697.herokuapp.com/cable"
+  config.action_cable.url = "wss://whispering-meadow-60697.herokuapp.com/cable"
   config.action_cable.allowed_request_origins = [ "http://whispering-meadow-60697.herokuapp.com/", "https://whispering-meadow-60697.herokuapp.com/" ]
 
 
