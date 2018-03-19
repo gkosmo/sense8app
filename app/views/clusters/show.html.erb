@@ -17,8 +17,8 @@
    <%= simple_form_for [@cluster, @group], remote: true do |f| %>
         <%= f.input :profiles, label: "New Inner Chat", collection: @cluster.profiles, collection: @cluster.profiles.reject{|p| p == current_user.profile }, label_method: :nickname, value_method: :id, multiple: true,   as: :check_boxes%>
   <%= f.error_notification %>
+        <%= f.button :submit, class: 'btn btn-default' %>
 
-    <%= f.submit %>
    <% end %>
     </div>
     <div  class="col-xs-7 col-xs-offset-1">
@@ -28,12 +28,12 @@
           <%= render 'message', message: message%>
         <% end %>
       </div>
-      <div id="message-form">
+      <div class="text-center" id="message-form">
       <%= simple_form_for @message, url: cluster_cluster_message_path(@cluster), method: :post, remote: true do |f| %>
         <%= f.input :body, label: "message to your cluster" %>
           <%= f.error_notification %>
 
-        <%= f.submit %>
+        <%= f.button :submit, class: 'btn btn-default' %>
       <% end %>
       </div>
     </div>
