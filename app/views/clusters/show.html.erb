@@ -51,8 +51,8 @@
       { channel: 'ClusterRoomsChannel' , cluster_room_id: <%= @cluster.id %> },
       { received: (data) => {
        var messagesNode = document.getElementById('messages');
-
-messagesNode.insertAdjacentHTML('beforeend',data.message_partial);
+       document.getElementById('message_body').value = "";
+        messagesNode.insertAdjacentHTML('beforeend',data.message_partial);
             scrollLastMessageIntoView();
        } }  )
   </script>
