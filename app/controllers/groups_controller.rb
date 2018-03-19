@@ -7,13 +7,6 @@ class GroupsController < ApplicationController
     profiles << current_user.profile
     @group=  Group.new(profiles: profiles)
     @group.cluster = @cluster
-    p "oooooooooo"
-
-    p @group
-    p @group.profiles
-
-    p "oooooooooo"
-
 
  respond_to do |format|
       if @group.save
