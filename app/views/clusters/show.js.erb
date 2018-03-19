@@ -18,4 +18,12 @@ function updateForm(form ){
    updateMessages('<%= j render 'message', message: message %>');
   <% end %>
    updateForm('<%= j render 'group_form' %>');
+     App['group_room_<%= @group.id %>'] = App.cable.subscriptions.create(
+      { channel: 'GroupRoomsChannel' , group_room_id: <%= @group.id %> },
+      { received: (data) => {
+       var messagesNode = document.getElementById('messages');
+
+messagesNode.insertAdjacentHTML('beforeend',data.message_partial);
+            scrollLastMessageIntoView();
+       } }  )
   <% end %>

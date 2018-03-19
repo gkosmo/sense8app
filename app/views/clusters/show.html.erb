@@ -22,7 +22,7 @@
    <% end %>
     </div>
     <div  class="col-xs-7 col-xs-offset-1">
-      <div class="well"  id="messages">
+      <div class="well text-center"  id="messages">
         <% @cluster.messages.order(:created_at).each do |message| %>
 
           <%= render 'message', message: message%>
@@ -40,3 +40,20 @@
 
   </div>
 </div>
+<% content_for :after_js do %>
+  <script>
+    function cons(){
+
+    console.log('in script show');
+     }
+     cons();
+    App['cluster_room_<%= @cluster.id %>'] = App.cable.subscriptions.create(
+      { channel: 'ClusterRoomsChannel' , cluster_room_id: <%= @cluster.id %> },
+      { received: (data) => {
+       var messagesNode = document.getElementById('messages');
+
+messagesNode.insertAdjacentHTML('beforeend',data.message_partial);
+            scrollLastMessageIntoView();
+       } }  )
+  </script>
+<% end %>

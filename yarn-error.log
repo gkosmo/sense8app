@@ -2,13 +2,13 @@ Arguments:
   /usr/bin/node /usr/share/yarn/bin/yarn.js check --integrity
 
 PATH: 
-  /home/gk/.rbenv/versions/2.4.3/lib/ruby/gems/2.4.0/bin:/home/gk/.rbenv/versions/2.4.3/bin:/home/gk/.rbenv/libexec:/home/gk/.rbenv/plugins/ruby-build/bin:/usr/local/opt/rbenv/bin:./bin:/home/gk/.rbenv/shims:/home/gk/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+  /home/gk/.rbenv/versions/2.4.3/lib/ruby/gems/2.4.0/bin:/home/gk/.rbenv/versions/2.4.3/bin:/home/gk/.rbenv/libexec:/home/gk/.rbenv/plugins/ruby-build/bin:./bin:/home/gk/.rbenv/shims:/home/gk/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
 
 Yarn version: 
   1.5.1
 
 Node version: 
-  9.7.1
+  6.11.4
 
 Platform: 
   linux x64
@@ -6080,9 +6080,9 @@ Lockfile:
 
 Trace: 
   Error: Found 1 errors.
+      at MessageError.Error (native)
       at new MessageError (/usr/share/yarn/lib/cli.js:186:110)
       at /usr/share/yarn/lib/cli.js:59470:13
-      at Generator.next (<anonymous>)
+      at next (native)
       at step (/usr/share/yarn/lib/cli.js:98:30)
       at /usr/share/yarn/lib/cli.js:109:13
-      at <anonymous>
