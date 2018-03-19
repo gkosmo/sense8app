@@ -87,7 +87,7 @@ Rails.application.configure do
 
   #Action cable and reddis
   config.action_cable.url = "ws://whispering-meadow-60697.herokuapp.com/"
-  config.action_cable.allowed_request_origins = [ "http://whispering-meadow-60697.herokuapp.com/" ]
+  config.action_cable.allowed_request_origins = [ "http://whispering-meadow-60697.herokuapp.com/", "https://whispering-meadow-60697.herokuapp.com/" ]
 
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
