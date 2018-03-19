@@ -4,6 +4,7 @@
     <i>  <%= hob.proficiency %> </i>
     description:
     <p><%= hob.description %> </p>
+    <% if current_user.profile == @profile %>
     <%= link_to 'Delete Hobby', profile_hobby_path(@profile, hob), method: :delete , remote: true%>
-
+   <% end %>
   </div>
