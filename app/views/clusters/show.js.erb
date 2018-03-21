@@ -1,18 +1,16 @@
 function updateMessages(messagesNode) {
   let messnode = document.getElementById('messages');
-  messnode.insertAdjacentHTML('beforeend', messagesNode);
-  console.log('hey');
+  messnode.insertAdjacentHTML('afterbegin', messagesNode);
 }
 function updateForm(form ){
-  console.log('hey2');
-
   let messnode = document.getElementById('messages');
-  console.log('hey3');
-
   document.getElementById('message-form').innerHTML = form;
-  console.log('hey4');
 }
-<% unless @group.nil? %>
+function updateClusterPage(page){
+ let messnode = document.getElementById('mainContainerCluster');
+  messnode.innerHTML = page;
+}
+<% unless @group.nil? || @messages.nil? %>
  document.getElementById('messages').innerHTML ="";
  <% @messages.each do |message| %>
    updateMessages('<%= j render 'message', message: message %>');
@@ -23,7 +21,9 @@ function updateForm(form ){
       { received: (data) => {
        var messagesNode = document.getElementById('messages');
 
-messagesNode.insertAdjacentHTML('beforeend',data.message_partial);
+messagesNode.insertAdjacentHTML('afterbegin',data.message_partial);
             scrollLastMessageIntoView();
        } }  )
+<% else %>
+  updateClusterPage('<%= j render 'show', message: @message, cluster: @cluster, group: @group %>' );
   <% end %>

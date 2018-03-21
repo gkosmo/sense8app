@@ -9,10 +9,11 @@ class ClustersController < ApplicationController
  respond_to do |format|
     unless params[:messages].nil?
         @group = Group.includes(:profiles).find(params[:messages].to_i)
-        @messages = @group.messages.order(:created_at)
+        @messages = @group.messages.order(created_at: :asc)
 
         format.js
       else
+        format.js
         format.html
     end
   end

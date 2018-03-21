@@ -3,6 +3,6 @@ var messagesNode = document.getElementById('messages');
 document.getElementById('message_body').value = "";
 var textnode =  ' <%= j render "message", message: @message%>';         // Create a text node
 
-messagesNode.insertAdjacentHTML('beforeend',textnode);
+messagesNode.insertAdjacentHTML('afterbegin',textnode);
 };
 // cluster_message();
