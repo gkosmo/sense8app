@@ -9,9 +9,8 @@ class Group < ApplicationRecord
 
 
   def group_exists
-    p     groups =  Group.where(cluster: cluster)
-    p groups
-    p "ggggggggggggggggggggg"
+    groups =  Group.where(cluster: cluster)
+
     groups.each do |g|
         errors.add(:group, "group already exists") if g.profiles - profiles == profiles - g.profiles && g.profiles.length == profiles.length
     end

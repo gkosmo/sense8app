@@ -16,6 +16,15 @@
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
     <%= yield :after_js %>
-
+   <script>
+    <% unless current_user.nil? %>
+   setInterval(function(){
+    console.log("test ) online ");
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "/i_am_still_here", true);
+  xhttp.send();
+}, 5*58*1000);
+<% end %>
+   </script>
   </body>
 </html>

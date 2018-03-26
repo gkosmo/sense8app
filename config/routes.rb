@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 mount ActionCable.server => "/cable"
-
+  get 'i_am_still_here', to: "pages#i_am_still_here"
   get 'groups/create'
 
   resources :clusters, only: [:show] do
+        get "get_cluster_online", to: "clusters#get_cluster_online"
         post "cluster_message", to: "clusters#cluster_message"
         resources :groups, only: [:create] do
             post "cluster_message", to: "groups#group_message"

@@ -8,7 +8,7 @@ class GroupsController < ApplicationController
     @group=  Group.new(profiles: profiles)
     @group.cluster = @cluster
 
- respond_to do |format|
+   respond_to do |format|
       if @group.save
         format.js
         format.html { redirect_to @cluster, notice: 'save' }
@@ -21,12 +21,15 @@ class GroupsController < ApplicationController
 
 
   end
- def group_message
+
+   def group_message
     @group =Group.find(params[:group_id])
      @message = Message.new(user: current_user, messageable: @group, body: message_params[:body] )
      @message.save!
   end
-private
+
+  private
+
   def message_params
       params.require(:message).permit(:body)
     end

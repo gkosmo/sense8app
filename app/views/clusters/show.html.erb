@@ -4,7 +4,11 @@
       <div class="well ">
       <strong> Your Cluster</strong>
       <% @cluster.profiles.each do |profile| %>
-      <p> <%= link_to profile.nickname, profile_path(profile) %> </p>
+      <p> <%= link_to profile.nickname, profile_path(profile) %>
+        <span id="user-<%= profile.user.id %>">
+
+        </span>
+      </p>
       <% end %>
       </div>
       <%= link_to "Your Cluster Chat", cluster_path(@cluster), remote: :true %>
@@ -44,11 +48,6 @@
 </div>
 <% content_for :after_js do %>
   <script>
-    function cons(){
-
-    console.log('in script show');
-     }
-     cons();
     App['cluster_room_<%= @cluster.id %>'] = App.cable.subscriptions.create(
       { channel: 'ClusterRoomsChannel' , cluster_room_id: <%= @cluster.id %> },
       { received: (data) => {
@@ -56,6 +55,30 @@
        document.getElementById('message_body').value = "";
         messagesNode.insertAdjacentHTML('afterbegin',data.message_partial);
             scrollLastMessageIntoView();
-       } }  )
+       } }  );
+ setInterval( function(){
+  Rails.ajax({
+      url: <%= @cluster.id %> + "/get_cluster_online",
+      type: 'GET',
+      datatype: 'json',
+      success: (data) => {
+        console.log(data);
+          data.forEach((user) => {
+              document.getElementById('user-'+user.id).innerText = "is Online ;)"
+          })
+            }
+
+    });
+
+Rails.ajax({
+      url: "/i_am_still_here",
+      type: 'GET',
+      success: (data) => {
+
+            }
+
+    });
+   }, 5 * 1000);
+
   </script>
 <% end %>

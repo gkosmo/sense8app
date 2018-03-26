@@ -17,7 +17,7 @@ class Message < ApplicationRecord
       ActionCable.server.broadcast("group_room_#{messageable_id}", {
       message_partial: ApplicationController.renderer.render(
         partial: "clusters/message",
-        locals: { message: self, user_is_messages_author: false }
+        locals: { message: self, user_is_messages_author: false, group: self.messageable_id }
       ),
       current_user_id: user.id
     })

@@ -18,7 +18,7 @@ class Profile < ApplicationRecord
   validates :gender_identity, presence: true,inclusion: { in: ["male","female", "other"] }
   validates :sexuality, presence: true,inclusion: { in: ["hetero", "lesbian", "gay", "trans", "bi", "questionning", "investigating", "queer", "other"] }
   after_validation :geocode_birth_and_living, on: :create
-
+  has_many :messageable, through: :user
    accepts_nested_attributes_for :hobby_to_profile
 
   def self.genders

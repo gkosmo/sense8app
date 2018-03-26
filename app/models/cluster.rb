@@ -5,6 +5,7 @@ class Cluster < ApplicationRecord
 
   def messages
       Message.includes(:user).where(messageable: self)
+
   end
   def self.create_or_find_cluster(profile)
      clusters = Cluster.where(birth_date: profile.birth_date)
