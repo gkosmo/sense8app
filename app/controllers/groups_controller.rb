@@ -41,7 +41,6 @@ class GroupsController < ApplicationController
      end
      @message = Message.new(user: current_user, messageable: @group, body: message_params[:body] )
      @message.save!
-   p  @notifications
   end
 
   private

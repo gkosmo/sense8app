@@ -1,11 +1,12 @@
-function updateMessages(messagesNode) {
+function updateGroupMessages(messagesNode) {
   let messnode = document.getElementById('messages');
   messnode.insertAdjacentHTML('afterbegin', messagesNode);
 }
-function updateForm(form ){
+function updateGroupForm(form ){
   let messnode = document.getElementById('messages');
   document.getElementById('message-form').innerHTML = form;
 }
+
 function updateClusterPage(page){
  let messnode = document.getElementById('mainContainerCluster');
   messnode.innerHTML = page;
@@ -13,13 +14,14 @@ function updateClusterPage(page){
 <% unless @group.nil? || @messages.nil? %>
  document.getElementById('messages').innerHTML ="";
  <% @messages.each do |message| %>
-   updateMessages('<%= j render 'message', message: message %>');
+   updateGroupMessages('<%= j render 'message', message: message %>');
   <% end %>
-   updateForm('<%= j render 'group_form' %>');
+   updateGroupForm('<%= j render 'group_form' %>');
      App['group_room_<%= @group.id %>'] = App.cable.subscriptions.create(
       { channel: 'GroupRoomsChannel' , group_room_id: <%= @group.id %> },
       { received: (data) => {
        var messagesNode = document.getElementById('messages');
+      document.getElementById('message_body').value = "";
 
 messagesNode.insertAdjacentHTML('afterbegin',data.message_partial);
             scrollLastMessageIntoView();
