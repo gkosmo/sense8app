@@ -24,8 +24,24 @@ class GroupsController < ApplicationController
 
    def group_message
     @group =Group.find(params[:group_id])
+    @notifications = []
+    @group.profiles.each do | profile|
+        if profile.user != current_user
+         note = Notification.where(group: @group, user: profile.user)
+          if !note.empty?
+            note = note[0]
+            note.counter += 1
+            note.save
+          else
+            note = Notification.create(group: @group, user: profile.user, counter: 1)
+          end
+          @notifications << note
+        end
+
+     end
      @message = Message.new(user: current_user, messageable: @group, body: message_params[:body] )
      @message.save!
+   p  @notifications
   end
 
   private

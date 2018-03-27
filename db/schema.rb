@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180326115656) do
+ActiveRecord::Schema.define(version: 20180327175746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,17 @@ ActiveRecord::Schema.define(version: 20180326115656) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "status"
+    t.bigint "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "counter"
+    t.index ["group_id"], name: "index_notifications_on_group_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "profileclusters", force: :cascade do |t|
     t.bigint "profile_id"
     t.bigint "cluster_id"
@@ -154,6 +165,8 @@ ActiveRecord::Schema.define(version: 20180326115656) do
   add_foreign_key "hobby_to_profiles", "hobbies"
   add_foreign_key "hobby_to_profiles", "profiles"
   add_foreign_key "messages", "users"
+  add_foreign_key "notifications", "groups"
+  add_foreign_key "notifications", "users"
   add_foreign_key "profileclusters", "clusters"
   add_foreign_key "profileclusters", "profiles"
   add_foreign_key "profilegroups", "groups"
