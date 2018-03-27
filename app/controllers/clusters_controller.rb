@@ -25,7 +25,7 @@ class ClustersController < ApplicationController
      @message.save!
   end
   def get_cluster_online
-    @cluster =Cluster.find(params[:cluster_id])
+       @cluster =Cluster.find(params[:cluster_id])
         users = []
         @cluster.profiles.each do |p|
             users << p.user if p.user.is_online?
