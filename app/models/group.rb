@@ -6,6 +6,8 @@ class Group < ApplicationRecord
   accepts_nested_attributes_for :profilegroups
   accepts_nested_attributes_for :profiles
   validate :group_exists , on: :create
+  has_many :notifications
+
 
 
   def group_exists

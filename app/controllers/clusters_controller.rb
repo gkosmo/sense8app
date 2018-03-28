@@ -10,7 +10,7 @@ class ClustersController < ApplicationController
     unless params[:messages].nil?
         @group = Group.find(params[:messages].to_i)
         @messages = @group.messages.order(created_at: :asc)
-
+        current_user.group_notification(@group).update(counter: 0)
         format.js
       else
         format.js
