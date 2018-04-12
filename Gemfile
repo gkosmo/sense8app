@@ -20,7 +20,8 @@ gem 'uglifier'
 gem 'webpacker'
 gem "geocoder"
 group :development do
-   gem 'bullet'
+  gem 'bullet'
+  gem 'rails-erd'
   gem 'web-console', '>= 3.3.0'
 end
 
